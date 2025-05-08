@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo-db
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - '27017:27017'
+    restart: always
+
+  backend:
+    build:
+      context: ./synback-main      # or wherever your backend Dockerfile lives
+      dockerfile: Dockerfile
+    container_name: three-tier-backend
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=${MONGODB_URI}   # picks up from .env
+      - PORT=${BACKEND_PORT}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - '${BACKEND_PORT}:${BACKEND_PORT}'
+    depends_on:
+      - mongo-db
+    restart: always
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./synfront-main     # or wherever your frontend Dockerfile lives
+      dockerfile: Dockerfile
+    container_name: three-tier-frontend
+    env_file:
+      - .env
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:${BACKEND_PORT}
+      - PORT=${FRONTEND_PORT}
+    ports:
+      - '${FRONTEND_PORT}:${FRONTEND_PORT}'
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
