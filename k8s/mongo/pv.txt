@@ -1,0 +1,13 @@
+ubuntu@ip-172-31-12-161:~/projectfinal/k8s/mongo$ cat pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: mongo-pv
+spec:
+    capacity:
+       storage: 1Gi
+    accessModes:
+       - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Retain
+    hostPath:
+      path: /mnt/data

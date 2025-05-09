@@ -5,4 +5,4 @@ metadata:
   namespace: three-tier
 type: Opaque
 data:
-  api-key: QUl6YVN5QVZLZ1NKMzZJX0h3azN6S3pKd3pUS0xPjhLYU5EMlU= 
+  api-key: QUl6YVN5QVZLZ1NKMzZJX0h3azN6S3pKd3pUS0xPjhLYU5EMlU=

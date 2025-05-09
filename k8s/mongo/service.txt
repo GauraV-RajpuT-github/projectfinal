@@ -1,0 +1,15 @@
+ubuntu@ip-172-31-12-161:~/projectfinal/k8s/mongo$ cat service.yaml
+#done service is a way to expose the deployment to other pods in the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: three-tier
+  name: mongodb-svc
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - name: mongodb-svc
+    protocol: TCP
+    port: 27017
+    targetPort: 27017

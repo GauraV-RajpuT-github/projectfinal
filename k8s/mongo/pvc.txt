@@ -1,0 +1,12 @@
+ubuntu@ip-172-31-12-161:~/projectfinal/k8s/mongo$ cat pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: mongo-volume-claim
+    namespace: three-tier
+spec:
+    accessModes:
+     - ReadWriteOnce
+    resources:
+      requests:
+         storage: 1Gi

@@ -1,0 +1,11 @@
+ubuntu@ip-172-31-12-161:~/projectfinal/k8s/mongo$ cat secrets.yaml
+#done
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: three-tier
+  name: mongo-sec
+type: Opaque
+data:
+  password: cGFzc3dvcmQxMjM=   #Three-Tier-Project
+  username: YWRtaW4= #admin
